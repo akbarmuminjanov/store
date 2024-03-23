@@ -1,11 +1,8 @@
 from django.shortcuts import render
-from .models import Product, Category, SubCategory 
+from .models import Product, Category
 
-def index_view(request):
-    contex = {
-        "title": "Store"
-    }
-    return render(request, "index.html", contex)
+def index(request):
+    return render(request, "index.html")
 
 def product_view(request):
     category = Category.objects.all()
@@ -23,3 +20,6 @@ def category_page(request, category_id):
         "products":product
     }
     return render(request, "products.html", context)
+
+def profile(request):
+    return render(request, "users/profile.html")

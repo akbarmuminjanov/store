@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Product, Category, SubCategory
+from .models import Product, Category
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ['category', 'product_id', 'name']
@@ -8,8 +8,4 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ['name']
-
-@admin.register(SubCategory)
-class SubCategoryAdmin(admin.ModelAdmin):
     list_display = ['name']
