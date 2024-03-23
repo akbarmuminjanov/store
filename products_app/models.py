@@ -7,16 +7,8 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-
-class SubCategory(models.Model):
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    name = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.name
-
 class Product(models.Model):
-    category = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     product_id = models.CharField(max_length= 10, editable=False, unique=True, default=create_new_id)
     name = models.CharField(max_length=255)
     descriptions = models.TextField(null=True)
