@@ -21,5 +21,3 @@ def category_page(request, category_id):
     }
     return render(request, "products.html", context)
 
-def profile(request):
-    return render(request, "users/profile.html")
