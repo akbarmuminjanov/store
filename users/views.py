@@ -3,8 +3,13 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.http import HttpResponse, Http404
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+def profile(request):
+    return render(request, "profile.html")
+
+
 def login(request):
     if request.user.is_authenticated:
         return HttpResponse("Siz allaqachon tizimga kirib bo'lgansiz!")
@@ -66,6 +71,7 @@ def signup(request):
             pass
     return render(request, "register.html")
 
-
-def profile(request):
-    return render(request, "profile.html")
+@login_required(login_url="login")
+def user_update(request):
+    user = request.user
+    
