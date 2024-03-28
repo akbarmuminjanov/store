@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.http import HttpResponse, Http404
-from django.contrib.auth import authenticate, login as auth_login, logout
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 
 # Create your views here.
 def login(request):
@@ -21,6 +21,15 @@ def login(request):
             return HttpResponse("Username yoki parol noto'g'ri")
         
     return render(request, "login.html")
+
+def logout(request):
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            auth_logout(request)
+            return redirect("profile")
+        return render(request, "logout.html")
+    else:
+        return HttpResponse("Siz allaqachon tizimdan chiqib ketib bo'lgansiz!")
 
 def signup(request):
     if request.method == 'POST':
