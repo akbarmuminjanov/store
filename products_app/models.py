@@ -3,7 +3,7 @@ from .utils import create_new_id
 
 class Category(models.Model):
     name = models.CharField(max_length=255)
-    slug = models.SlugField(max_length=200, unique=True, blank=True, null=True)
+    slug = models.SlugField(max_length=200, blank=True, null=True)
 
     class Meta:
         ordering = ('name',)
@@ -17,7 +17,7 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')
     product_kod = models.CharField(max_length= 10, editable=False, unique=True, default=create_new_id)
     name = models.CharField(max_length=255)
-    slug = models.SlugField(max_length=200, unique=True, blank=True, null=True)
+    slug = models.SlugField(max_length=200, blank=True, null=True)
     image = models.ImageField(upload_to="product_image")
     description = models.TextField(blank=True)
     price = models.DecimalField(max_digits=14, decimal_places=2)
