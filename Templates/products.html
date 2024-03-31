@@ -6,7 +6,7 @@
 {% endblock css %}
 
 {% block title %}
-<title>{{ title }}</title>
+    {% if category %}{{ category.name }}{% else %}Products{% endif %}
 {% endblock title %}
 
 {% block content %}
@@ -17,17 +17,18 @@
 
         <div class="col-lg-3">
 
-            <h1 class="my-4">Store</h1>
+            <h1 class="mt-5">{% if category %}{{ category.name }}{% else %}Store{% endif %}</h1>
             
-            <div class="list-group">
-                <button type="button" class="list-group-item list-group-item-action" aria-current="true">
-                    <a style="text-decoration: none;" href="{% url 'product_view' %}">all categories</a>
-                </button>
-                {% for i in categories %}
-                <button type="button" class="list-group-item list-group-item-action"><a style="text-decoration: none;" href="{% url 'category-list' category_id=i.id %}">{{i.name}}</a></button>
+            <ul>
+                <li {% if not category %}class="selected"{% endif %}>
+                    <a href="{% url 'product_view' %}">All</a>
+                </li>
+                {% for c in categories %}
+                    <li {% if category.slug == c.slug %}class="selected"{% endif %}>
+                        <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+                    </li>
                 {% endfor %}
-                
-            </div>
+            </ul>
 
         </div>
         <!-- /.col-lg-3 -->
@@ -62,20 +63,20 @@
             </div>
 
             <div class="row">
-                {% for pro in products %}
+                {% for product in products %}
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card h-100">
-                        <a href="#">
+                        <a href="{{ product.get_absolute_url }}">
                             <img class="card-img-top"
-                                 src="{{pro.image.url}}"
+                                 src="{% if product.image %}{{product.image.url}}{% else %}{% static 'img/no_image.webp' %}{% endif %}"
                                  alt="">
                         </a>
                         <div class="card-body">
                             <h4 class="card-title">
-                                <a href="#">{{pro.name}}</a>
+                                <a href="{{ product.get_absolute_url }}">{{product.name}}</a>
                             </h4>
-                            <h5>{{pro.price}} so`m</h5>
-                            <p class="card-text">{{pro.description}}</p>
+                            <h5>{{product.price}} so`m</h5>
+                            <p class="card-text">{{product.description}}</p>
                         </div>
                         <div class="card-footer text-center">
                             <button type="button" class="btn btn-outline-success">Savatchaga qo`shish</button>
