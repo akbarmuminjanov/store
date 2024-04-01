@@ -45,48 +45,61 @@
         <br><br><br>
   
         <div class="product-price">
-          <p class="new-price">New Price: <span>{{ product.price }} so'm</span></p>
+          <p class="new-price">Price: <span>{{ product.price }} so'm</span></p>
         </div>
   
         <div class="product-detail">
           <h2>about this item: </h2>
           <p>{{ product.description|linebreaks }}</p>
           <ul>
+            <li>Article number: <span><code>{{ product.product_kod }}</code></span></li>
             <li>Color: <span>Black</span></li>
-            <li>Available: <span>in stock</span></li>
-            <li>Category: <span>Shoes</span></li>
+            <li>Available: <span>{% if product.available %}in stock {% else %}no stock{% endif %}</span></li>
+            <li>Category: <span>{{ product.category }}</span></li>
             <li>Shipping Area: <span>All over the world</span></li>
             <li>Shipping Fee: <span>Free</span></li>
           </ul>
         </div>
   
         <div class="purchase-info">
-          <input type="number" min="0" value="1">
-          <button type="button" class="btn">
+        <form action="{% url 'cart_add' product.id %}" method="post">{% csrf_token %}
+            {{ cart_product_form }}
+            <input type="number" min="0" value="1">
+          <button type="submit" class="btn">
             Add to Cart <i class="fas fa-shopping-cart"></i>
           </button>
           <button type="button" class="btn">Compare</button>
+        </form>
         </div>
   
         <div class="social-links">
           <p>Share At: </p>
-          <a href="#">
-            <i class="fab fa-facebook-f"></i>
+          <a class="mb-2" href="#">
+            <i class="fab fa-facebook-f"></i> 
           </a>
-          <a href="#">
+          <a class="mb-2" href="#">
             <i class="fab fa-twitter"></i>
           </a>
-          <a href="#">
+          <a class="mb-2" href="#">
             <i class="fab fa-instagram"></i>
           </a>
-          <a href="#">
+          <a class="mb-2" href="#">
             <i class="fab fa-whatsapp"></i>
           </a>
-          <a href="#">
+          <a class="mb-2" href="#">
             <i class="fab fa-pinterest"></i>
           </a>
         </div>
       </div>
     </div>
   </div>
+
+  <script>
+    // Функция для вставки содержимого формы внутрь элемента input
+    function insertFormIntoInput() {
+        var inputElement = document.getElementById('dynamicInput');
+        var formContent = document.getElementById('cartForm').innerHTML;
+        inputElement.value = formContent;
+    }
+</script>
   {% endblock content %}
