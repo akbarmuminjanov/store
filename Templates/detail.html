@@ -42,7 +42,7 @@
       </div>
       <!-- card right -->
       <div class="product-content">
-        <br><br><br>
+        
   
         <div class="product-price">
           <p class="new-price">Price: <span>{{ product.price }} so'm</span></p>
@@ -63,8 +63,8 @@
   
         <div class="purchase-info">
         <form action="{% url 'cart_add' product.id %}" method="post">{% csrf_token %}
-            {{ cart_product_form }}
-            <input type="number" min="0" value="1">
+
+            <input name="quantity" id="id_quantity" type="number" min="0" value="1">
           <button type="submit" class="btn">
             Add to Cart <i class="fas fa-shopping-cart"></i>
           </button>
@@ -94,12 +94,4 @@
     </div>
   </div>
 
-  <script>
-    // Функция для вставки содержимого формы внутрь элемента input
-    function insertFormIntoInput() {
-        var inputElement = document.getElementById('dynamicInput');
-        var formContent = document.getElementById('cartForm').innerHTML;
-        inputElement.value = formContent;
-    }
-</script>
   {% endblock content %}
