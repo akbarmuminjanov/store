@@ -32,4 +32,3 @@ def product_detail(request, id, slug):
 #     }
 #     return render(request, "products.html", context)
 
-
