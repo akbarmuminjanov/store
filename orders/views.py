@@ -13,8 +13,8 @@ def order_create(request):
             for item in cart:
                 OrderItem.objects.create(order=order, product=item["product"], price=item["price"], quantity=item["quantity"])
             cart.clear()
-            return render(request, "created.html", {'order':order})
+            return render(request, "success.html", {'order':order})
     else:
         form = OrderCreateForm
-    return render(request, "create.html", {'cart':cart, 'form':form})
+    return render(request, "order-create.html", {'cart':cart, 'form':form})
     

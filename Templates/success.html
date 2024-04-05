@@ -1,15 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <meta name="description" content=""/>
-    <meta name="author" content=""/>
-    <title>Store - Спасибо за заказ!</title>
-    <link href="../vendor/css/auth.css" rel="stylesheet"/>
-</head>
-<body class="bg-primary">
+{% extends "base2.html" %}
+
+{% block title %}Thank you{% endblock %}
+
+{% block content %}
 <div id="layoutAuthentication">
     <div id="layoutAuthentication_content">
         <main>
@@ -22,7 +15,7 @@
                             </div>
                             <div class="card-body text-center">
                                 <h4>
-                                    Ваш заказ успешно сформирован.
+                                    {{ order.id }}
                                 </h4>
                             </div>
                         </div>
@@ -32,5 +25,4 @@
         </main>
     </div>
 </div>
-</body>
-</html>
+{% endblock content %}
