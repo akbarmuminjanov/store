@@ -72,7 +72,11 @@
                     <h4 class="float-right">{{ cart.get_total_price }} so'm</h4>
                 </div>
             </div>
-            <a class="btn btn-success btn-lg float-right" href="../orders/order-create.html">
+            <p class="text-right">
+                <a href="{% url 'product_view' %}" class="button light">Continue shopping</a>
+                <a href="{% url 'order_create' %}" class="button">Checkout</a>
+            </p>
+            <a class="btn btn-success btn-lg float-right" href="{% url 'order_create' %}">
                 Оформить заказ
             </a>
         </div>
