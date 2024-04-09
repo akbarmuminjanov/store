@@ -23,7 +23,6 @@ class Product(models.Model):
     product_kod = models.CharField(max_length= 10, editable=False, unique=True, default=create_new_id)
     name = models.CharField(max_length=255)
     slug = models.SlugField(max_length=200, blank=True, null=True)
-    image = models.ImageField(upload_to="product_image")
     description = models.TextField(blank=True)
     price = models.DecimalField(max_digits=14, decimal_places=2)
     quantity = models.PositiveIntegerField(default=0)
@@ -41,3 +40,7 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+    
+class ProductImage(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to="product_image")

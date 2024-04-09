@@ -8,10 +8,12 @@
 <div class="card-wrapper">
     <div class="card">
       <!-- card left -->
+      {% for picture in product.productimage_set.all %}
+      {% if picture == product.productimage_set.all.first %}
       <div class="product-imgs">
         <div class="img-display">
           <div class="img-showcase">
-            <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}" alt="shoe image">
+            <img src="{% if picture.image %}{{ picture.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}" alt="shoe image">
             <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}" alt="shoe image">
             <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}" alt="shoe image">
             <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}" alt="shoe image">
@@ -20,26 +22,28 @@
         <div class="img-select">
           <div class="img-item">
             <a href="#" data-id="1">
-              <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}" alt="shoe image">
+              <img src="{% if picture.image %}{{ picture.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}" alt="shoe image">
             </a>
           </div>
           <div class="img-item">
             <a href="#" data-id="2">
-              <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}" alt="shoe image">
+              <img src="{% if picture.image %}{{ picture.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}" alt="shoe image">
             </a>
           </div>
           <div class="img-item">
             <a href="#" data-id="3">
-              <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}" alt="shoe image">
+              <img src="{% if picture.image %}{{ picture.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}" alt="shoe image">
             </a>
           </div>
           <div class="img-item">
             <a href="#" data-id="4">
-              <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}" alt="shoe image">
+              <img src="{% if picture.image %}{{ picture.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}" alt="shoe image">
             </a>
           </div>
         </div>
-      </div>
+      </div> 
+      {% endif %}
+      {% endfor %}
       <!-- card right -->
       <div class="product-content">
         
