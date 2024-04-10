@@ -27,6 +27,7 @@ img {
 }
 .img-showcase img {
   min-width: 100%;
+  
 }
 .img-select {
   display: flex;

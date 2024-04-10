@@ -4,46 +4,29 @@
     <link href="{% static 'css/detail.css' %}" rel="stylesheet">
 {% endblock css %}
 
+
 {% block content %}
 <div class="card-wrapper">
     <div class="card">
       <!-- card left -->
-      {% for picture in product.productimage_set.all %}
-      {% if picture == product.productimage_set.all.first %}
       <div class="product-imgs">
         <div class="img-display">
           <div class="img-showcase">
+            {% for picture in product.productimage_set.all %}
             <img src="{% if picture.image %}{{ picture.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}" alt="shoe image">
-            <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}" alt="shoe image">
-            <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}" alt="shoe image">
-            <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}" alt="shoe image">
+            {% endfor %}
           </div>
         </div>
         <div class="img-select">
+          {% for picture in product.productimage_set.all %}
           <div class="img-item">
-            <a href="#" data-id="1">
+            <a href="#" data-id="{{ forloop.counter }}">
               <img src="{% if picture.image %}{{ picture.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}" alt="shoe image">
             </a>
           </div>
-          <div class="img-item">
-            <a href="#" data-id="2">
-              <img src="{% if picture.image %}{{ picture.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}" alt="shoe image">
-            </a>
-          </div>
-          <div class="img-item">
-            <a href="#" data-id="3">
-              <img src="{% if picture.image %}{{ picture.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}" alt="shoe image">
-            </a>
-          </div>
-          <div class="img-item">
-            <a href="#" data-id="4">
-              <img src="{% if picture.image %}{{ picture.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}" alt="shoe image">
-            </a>
-          </div>
+          {% endfor %}
         </div>
-      </div> 
-      {% endif %}
-      {% endfor %}
+      </div>
       <!-- card right -->
       <div class="product-content">
         
@@ -97,5 +80,21 @@
       </div>
     </div>
   </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const imgItems = document.querySelectorAll(".img-item a");
+      const imgShowcase = document.querySelector(".img-showcase img");
+  
+      imgItems.forEach(function (item) {
+        item.addEventListener("click", function (event) {
+          event.preventDefault();
+          const imgSrc = this.querySelector("img").getAttribute("src");
+          imgShowcase.setAttribute("src", imgSrc);
+        });
+      });
+    });
+  </script>
+  
 
   {% endblock content %}
