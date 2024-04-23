@@ -1,7 +1,7 @@
-from django.shortcuts import render
 from django.shortcuts import render, get_object_or_404
 from .models import Product, Category
 from cart.forms import CartAddProductForm
+from django.core.paginator import Paginator
 
 def index(request):
     return render(request, "index.html")
@@ -13,10 +13,15 @@ def product_view(request, category_slug=None):
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
         products = products.filter(category=category)
+
+    paginator = Paginator(products, 2)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
     contex = {
         "category": category,
         "categoryies": categories,
-        "products": products
+        "page_obj": page_obj
     }
     return render(request, "products.html", contex)
 
