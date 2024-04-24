@@ -14,14 +14,16 @@ def product_view(request, category_slug=None):
         category = get_object_or_404(Category, slug=category_slug)
         products = products.filter(category=category)
 
-    paginator = Paginator(products, 2)
+    paginator = Paginator(products, 30)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
+    nums = "s"*page_obj.paginator.num_pages
 
     contex = {
         "category": category,
         "categoryies": categories,
-        "page_obj": page_obj
+        "page_obj": page_obj,
+        "nums":nums
     }
     return render(request, "products.html", contex)
 
